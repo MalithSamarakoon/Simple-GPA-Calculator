@@ -25,3 +25,28 @@ function addModule() {
 
             tbody.appendChild(row);
 }
+
+
+function calculateGPA() {
+
+    totalWeigtedPoints = 0;
+    totalCreditPoints = 0;
+
+    const tbody = document.getElementById("moduleBody");
+    const rows = tbody.querySelectorAll("tr");
+
+    for(let row of rows){
+        const creditInput = row.cells[1].querySelector('input[type="number"]');
+        const gradeSelect = row.cells[2].querySelector('select');
+
+        const credits = parseFloat(creditInput.value);
+        const grade = parseFloat(gradeSelect.value);
+
+        if(!isNaN(credits) && !isNaN(grade)){
+            totalWeigtedPoints += credits * grade;
+            totalCreditPoints += credits;
+        }
+    }
+
+    const gpa = totalWeigtedPoints / totalCreditPoints;
+}
