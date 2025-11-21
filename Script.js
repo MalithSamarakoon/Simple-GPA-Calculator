@@ -8,17 +8,18 @@ function addModule() {
                 <td>
                     <select>
                         <option value="">Select Grade</option>
+                        <option value="4.0">A+ (4.0)</option>
                         <option value="4.0">A (4.0)</option>
-                        <option value="4.0">A- (4.0)</option>
-                        <option value="3.7">B+ (3.7)</option>
-                        <option value="3.3">B (3.3)</option>
-                        <option value="3.0">B- (3.0)</option>
-                        <option value="2.7">C+ (2.7)</option>
-                        <option value="2.3">C (2.3)</option>
-                        <option value="2.0">C- (2.0)</option>
-                        <option value="1.7">D+ (1.7)</option>
-                        <option value="1.3">D (1.3)</option>
-                        <option value="0.0">F (0.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.7">C- (1.7)</option>
+                        <option value="1.3">D+ (1.3)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">E (0.0)</option>
                     </select>
                 </td>
             `;
@@ -49,4 +50,22 @@ function calculateGPA() {
     }
 
     const gpa = totalWeigtedPoints / totalCreditPoints;
+
+    const gpaResultField = document.getElementById("gpaResult");
+    if(!isNaN(gpa)){
+        gpaResultField.textContent = `Cumulative GPA: ${gpa.toFixed(2)}`;
+    } else {
+        gpaResultField.textContent = `Cumulative GPA: 0.00`;
+    }
+
 }
+
+
+function init(){
+    const tbody = document.getElementById("moduleBody");
+    tbody.addEventListener("input", calculateGPA);
+    tbody.addEventListener("change", calculateGPA);
+}
+
+
+window.addEventListener("DOMContentLoaded", init);
